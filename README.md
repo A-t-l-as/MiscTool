@@ -1,5 +1,5 @@
 # MiscTool
-A program for decompiling less important files from the KnightShift game, such as .dat, .int, etc. <br>
+A program for decompiling less important files from the KnightShift game, such as `.dat`, `.int`, etc. <br>
 
 Exporting data from a binary file to a `.cpp` file:
 ```
