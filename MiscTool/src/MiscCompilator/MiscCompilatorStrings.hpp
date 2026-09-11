@@ -7,8 +7,6 @@ namespace MiscCompilatorStrings
 
     constexpr char tile_set_name_str[] = "tile_set_name";
 
-    constexpr char tile_set_name_len_str[] = "tile_set_name_len";
-
     constexpr char const_value_name_str[] = "const_value_";
 
     constexpr char guid_name_str[] = "guid";

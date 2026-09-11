@@ -9,7 +9,7 @@ void KsTerrainDat::ReadFrom(BinFile& bin_file)
 {
     bin_file.ReadArray(this->m_file_signature, this->file_signature_size);
 
-    this->m_tile_set_name = bin_file.ReadSimpleString();
+    this->m_tile_set_name = bin_file.ReadShortString();
 
     bin_file.ReadValue(this->m_const_values[0]);
 
@@ -28,9 +28,7 @@ void KsTerrainDat::WriteTo(BinFile& output_bin_file)
 {
     output_bin_file.WriteValue(this->m_file_signature);
 
-    uint8_t tile_set_name_temp_len = static_cast<uint8_t>(this->m_tile_set_name.size());
-    output_bin_file.WriteValue(tile_set_name_temp_len);
-    output_bin_file.WriteString(this->m_tile_set_name);
+    output_bin_file.WriteShortStringWithLen(this->m_tile_set_name);
 
     output_bin_file.WriteValue(this->m_const_values[0]);
 
@@ -61,27 +59,7 @@ string KsTerrainDat::ToString()
 
     ss << endl;
 
-    const size_t tile_set_name_len = this->m_tile_set_name.length();
-
-    CW::WriteTrivialValue
-    (
-        ss,
-        MiscCompilatorStrings::tile_set_name_len_str,
-        static_cast<uint8_t>(tile_set_name_len)
-    );
-
-    ss << endl;
-
-    ss  << CompilatorValueTypes::c_char_type_str
-        << ' '
-        << MiscCompilatorStrings::tile_set_name_str
-        << '['
-        << MiscCompilatorStrings::tile_set_name_len_str
-        << "] = \""
-        << this->m_tile_set_name
-        << "\";"
-        << std::endl
-        << std::endl;
+    CW::WriteShortString(ss, MiscCompilatorStrings::tile_set_name_str, this->m_tile_set_name);
 
     CW::WriteTrivialValue
     (
